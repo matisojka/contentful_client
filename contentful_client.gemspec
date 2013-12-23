@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Contentful::VERSION
   spec.authors       = ['Mateusz Sójka']
   spec.email         = ['yagooar@gmail.com']
-  spec.description   = %q{contentful_client allows to communicate with the Contentful API in a simple and clean way.}
+  spec.description   = %q{contentful_client allows to use Ruby to communicate with the Contentful API in a simple and clean way.}
 
-  spec.summary       = %q{A tiny wrapper around the Contentful API.}
+  spec.summary       = %q{A tiny Ruby wrapper around the Contentful API.}
   spec.homepage      = ''
   spec.license       = 'MIT'
 
