@@ -1,24 +1,25 @@
 # ContentfulClient
 
-TODO: Write a gem description
+This gem is work in progress
+
+It allows to communicate with the Contentful API.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'contentful_client'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install contentful_client
+Checkout the repository.
 
 ## Usage
 
-TODO: Write usage instructions here
+For now, it allows defining a client and calling some endpoints on it:
+
+```ruby
+options = {
+  access_token: '123',
+  space_id: '456'
+}
+client = Contentful::Client.new(options)
+client.entries
+```
 
 ## Contributing
 
