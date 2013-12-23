@@ -1,4 +1,4 @@
-require_relative '../lib/contentful'
+require_relative '../lib/contentful_client'
 
 require 'rspec/autorun'
 require 'webmock/rspec'

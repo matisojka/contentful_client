@@ -1,7 +1,6 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'contentful/version'
+$:.unshift File.expand_path('../lib', __FILE__)
+require 'contentful_client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'contentful_client'
@@ -14,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = ''
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = Dir['README.md', 'LICENSE.txt', 'lib/**/*', 'spec/**/*']
   spec.test_files    = spec.files.grep(%r{^(spec)/})
   spec.require_paths = ['lib']
 
