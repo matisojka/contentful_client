@@ -17,17 +17,33 @@ module Contentful
       get([entries_path, id].join('/'))
     end
 
+    def content_types(params = {})
+      get(content_types_path, params)
+    end
+
+    def content_type(id)
+      get([content_types_path, id].join('/'))
+    end
+
     private
 
     attr_reader :options
 
-    def entries_path
-      "/spaces/#{space_id}/entries"
-    end
-
     def get(path, params = {})
       uri = [host, path].join
       RestClient.get(uri, params: { access_token: access_token }.merge(params))
+    end
+
+    def entries_path
+      [spaces_path, 'entries'].join('/')
+    end
+
+    def content_types_path
+      [spaces_path, 'content_types'].join('/')
+    end
+
+    def spaces_path
+      "/spaces/#{space_id}"
     end
 
     def space_id

@@ -11,6 +11,14 @@ module Contentful
     end
     subject { Contentful::Client.new(options) }
 
+    let(:expected_params) do
+      {
+        params: {
+          access_token: 'fefe'
+        }
+      }
+    end
+
     context 'missing options' do
 
       describe 'missing space_id' do
@@ -37,19 +45,10 @@ module Contentful
       let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/entries' }
 
       describe 'fetching all' do
-        let(:expected_params) do
-          {
-            params: {
-              access_token: 'fefe'
-            }
-          }
-        end
-
         it 'calls the entries endpoint' do
           expect(RestClient).to receive(:get).with(expected_uri, expected_params)
           subject.entries
         end
-
       end
 
       describe 'fetching with additional params' do
@@ -72,17 +71,47 @@ module Contentful
 
     describe '#entry(:id)' do
       let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/entries/123' }
-      let(:expected_params) do
-        {
-          params: {
-            access_token: 'fefe'
-          }
-        }
-      end
 
       it 'calls the entry endpoint' do
         expect(RestClient).to receive(:get).with(expected_uri, expected_params)
         subject.entry('123')
+      end
+    end
+
+    describe 'content_types' do
+      let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/content_types' }
+
+      describe 'fetching all' do
+        it 'calls the content_types endpoint' do
+          expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+          subject.content_types
+        end
+      end
+
+      describe 'fetching with additional params' do
+        let(:expected_params) do
+          {
+            params: {
+              access_token: 'fefe',
+              name: 'Frodo'
+            }
+          }
+        end
+
+        it 'calls the content_types endpoint' do
+          expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+          subject.content_types(name: 'Frodo')
+        end
+      end
+
+    end
+
+    describe '#content_type(:id)' do
+      let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/content_types/123' }
+
+      it 'calls the entry endpoint' do
+        expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+        subject.content_type('123')
       end
     end
 
