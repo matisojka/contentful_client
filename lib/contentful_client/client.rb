@@ -25,6 +25,10 @@ module Contentful
       get([content_types_path, id].join('/'), params)
     end
 
+    def asset(id)
+      get([assets_path, id].join('/'))
+    end
+
     def protocol
       options[:protocol] || 'https'
     end
@@ -44,6 +48,10 @@ module Contentful
 
     def content_types_path
       [spaces_path, 'content_types'].join('/')
+    end
+
+    def assets_path
+      [spaces_path, 'assets'].join('/')
     end
 
     def spaces_path

@@ -168,5 +168,14 @@ module Contentful
       end
     end
 
+    describe '#asset(:id)' do
+      let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/assets/123' }
+
+      it 'calls the asset endpoint' do
+        expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+        subject.asset('123')
+      end
+    end
+
   end
 end
