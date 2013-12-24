@@ -13,16 +13,20 @@ module Contentful
       get(entries_path, params)
     end
 
-    def entry(id)
-      get([entries_path, id].join('/'))
+    def entry(id, params = {})
+      get([entries_path, id].join('/'), params)
     end
 
     def content_types(params = {})
       get(content_types_path, params)
     end
 
-    def content_type(id)
-      get([content_types_path, id].join('/'))
+    def content_type(id, params = {})
+      get([content_types_path, id].join('/'), params)
+    end
+
+    def protocol
+      options[:protocol] || 'https'
     end
 
     private
@@ -52,10 +56,6 @@ module Contentful
 
     def access_token
       options[:access_token] || raise(AccessTokenError, 'provide a valid access token')
-    end
-
-    def protocol
-      @protocol || 'https'
     end
 
     def host

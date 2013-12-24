@@ -41,6 +41,27 @@ module Contentful
 
     end
 
+    describe '#protocol' do
+
+      describe 'default' do
+        let(:options) { {} }
+
+        it 'sets https per default' do
+          expect(subject.protocol).to eq('https')
+        end
+      end
+
+      describe 'http' do
+        let(:options) { { protocol: 'http' } }
+
+        it 'sets the protocol to http' do
+          expect(subject.protocol).to eq('http')
+        end
+      end
+
+
+    end
+
     describe '#entries(:options)' do
       let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/entries' }
 
@@ -69,12 +90,28 @@ module Contentful
       end
     end
 
-    describe '#entry(:id)' do
+    describe '#entry(:id, :params)' do
       let(:expected_uri) { 'https://cdn.contentful.com/spaces/aeae/entries/123' }
 
       it 'calls the entry endpoint' do
         expect(RestClient).to receive(:get).with(expected_uri, expected_params)
         subject.entry('123')
+      end
+
+      describe 'with additional params' do
+        let(:expected_params) do
+          {
+            params: {
+              access_token: 'fefe',
+              include: 1
+            }
+          }
+        end
+
+        it 'calls the entry endpoint' do
+          expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+          subject.entry('123', include: 1)
+        end
       end
     end
 
@@ -112,6 +149,22 @@ module Contentful
       it 'calls the entry endpoint' do
         expect(RestClient).to receive(:get).with(expected_uri, expected_params)
         subject.content_type('123')
+      end
+
+      describe 'with additional params' do
+        let(:expected_params) do
+          {
+            params: {
+              access_token: 'fefe',
+              include: 1
+            }
+          }
+        end
+
+        it 'calls the entry endpoint' do
+          expect(RestClient).to receive(:get).with(expected_uri, expected_params)
+          subject.content_type('123', include: 1)
+        end
       end
     end
 
